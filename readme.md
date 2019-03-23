@@ -4,7 +4,7 @@ Livecoding wrapper for Nanc-in-a-Can/canon-generator
 This is still a proof of concept.
 
 ## Usage
-```
+```supercollider
 (
 // make a Can.diverge
 a = FluentCan(\can2)
