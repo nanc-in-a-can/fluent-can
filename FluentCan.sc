@@ -1,23 +1,23 @@
 FluentCan {
-/*    var <> def;
-    var <> cp;
-    var <> notes;
-	var <> durs;
-	var <> tempos;
-	var <> transps;
-    var <> amps;
-    var <> percentageForTempo;
-    var <> normalize;
-    var <> baseTempo;
-    var <> convergeOnLast;
-    var <> instruments;
-    var <> period;
-    var <> repeat;
-    var <> player;
-    var <> osc;
-    var <> meta;
-    var <> melodist;
-    var <> type;*/
+    var <> prDef;
+    var <> prCp;
+    var <> prNotes;
+	var <> prDurs;
+	var <> prTempos;
+	var <> prTransps;
+    var <> prAmps;
+    var <> prPercentagefortempo;
+    var <> prNormalize;
+    var <> prBasetempo;
+    var <> prConvergeonlast;
+    var <> prInstruments;
+    var <> prPeriod;
+    var <> prRepeat;
+    var <> prPlayer;
+    var <> prOsc;
+    var <> prMeta;
+    var <> prMelodist;
+    var <> prType;
 
 	*new {|def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type|
 		 ^super.new.init(
@@ -112,23 +112,23 @@ FluentCan {
     }
 
     mapNotes {|fn|
-        this.notes = fn.(this.notes)
+        this.prNotes = fn.(this.notes)
     }
 
     mapDurs {|fn|
-        this.durs = fn.(this.durs)
+        this.prDurs = fn.(this.durs)
     }
 
     mapTempos {|fn|
-        this.tempos = fn.(this.tempos)
+        this.prTempos = fn.(this.tempos)
     }
 
     mapTransps {|fn|
-        this.transps = fn.(this.transps)
+        this.prTransps = fn.(this.transps)
     }
 
     mapPercentageForTempo {|fn|
-        this.percentageForTempo = fn.(this.percentageForTempo)
+        this.prPercentagefortempo = fn.(this.percentageForTempo)
     }
 
     getMelodist {
@@ -142,117 +142,118 @@ FluentCan {
             {this.melodist});
     }
 
+    // getters and setters mapped to the same names
     def {|val|
         if(val.isNil,
-            {^this.def},
-            {this.def = val})
+            {^this.prDef},
+            {this.prDef = val})
     }
 
     cp {|val|
         if(val.isNil,
-            {^this.cp},
-            {this.cp = val})
+            {^this.prCp},
+            {this.prCp= val})
     }
 
     notes {|val|
         if(val.isNil,
-            {^this.notes},
-            {this.notes = val})
+            {^this.prNotes},
+            {this.prNotes = val})
     }
 
     durs {|val|
         if(val.isNil,
-            {^this.durs},
-            {this.durs = val})
+            {^this.prDurs},
+            {this.prDurs = val})
     }
 
     tempos {|val|
         if(val.isNil,
-            {^this.tempos},
-            {this.tempos = val})
+            {^this.prTempos},
+            {this.prTempos = val})
     }
 
     transps {|val|
         if(val.isNil,
-            {^this.transps},
-            {this.transps = val})
+            {^this.prTransps},
+            {this.prTransps = val})
     }
 
     amps {|val|
         if(val.isNil,
-            {^this.amps},
-            {this.amps = val})
+            {^this.prAmps},
+            {this.prAmps = val})
     }
 
     percentageForTempo {|val|
         if(val.isNil,
-            {^this.percentageForTempo},
-            {this.percentageForTempo = val})
+            {^this.prPercentagefortempo},
+            {this.prPercentagefortempo = val})
     }
 
     normalize {|val|
         if(val.isNil,
-            {^this.normalize},
-            {this.normalize = val})
+            {^this.prNormalize},
+            {this.prNormalize = val})
     }
 
     baseTempo {|val|
         if(val.isNil,
-            {^this.baseTempo},
-            {this.baseTempo = val})
+            {^this.prBasetempo},
+            {this.prBasetempo = val})
     }
 
     convergeOnLast {|val|
         if(val.isNil,
-            {^this.convergeOnLast},
-            {this.convergeOnLast = val})
+            {^this.prConvergeonlast},
+            {this.prConvergeonlast = val})
     }
 
     instruments {|val|
         if(val.isNil,
-            {^this.instruments},
-            {this.instruments = val})
+            {^this.prInstruments},
+            {this.prInstruments = val})
     }
 
     period {|val|
         if(val.isNil,
-            {^this.period},
-            {this.period = val})
+            {^this.prPeriod},
+            {this.prPeriod = val})
     }
 
     repeat {|val|
         if(val.isNil,
-            {^this.repeat},
-            {this.repeat = val})
+            {^this.prRepeat},
+            {this.prRepeat = val})
     }
 
     player {|val|
         if(val.isNil,
-            {^this.player},
-            {this.player = val})
+            {^this.prPlayer},
+            {this.prPlayer = val})
     }
 
     osc {|val|
         if(val.isNil,
-            {^this.osc},
-            {this.osc = val})
+            {^this.prOsc},
+            {this.prOsc = val})
     }
 
     meta {|val|
         if(val.isNil,
-            {^this.meta},
-            {this.meta = val})
+            {^this.prMeta},
+            {this.prMeta = val})
     }
 
     melodist {|val|
         if(val.isNil,
-            {^this.melodist},
-            {this.melodist = val})
+            {^this.prMelodist},
+            {this.prMelodist = val})
     }
 
     type {|val|
         if(val.isNil,
-            {^this.type},
-            {this.type = val})
+            {^this.prType},
+            {this.prType = val})
     }
 }
