@@ -1,5 +1,5 @@
 FluentCan {
-    var <> def;
+/*    var <> def;
     var <> cp;
     var <> notes;
 	var <> durs;
@@ -17,7 +17,7 @@ FluentCan {
     var <> osc;
     var <> meta;
     var <> melodist;
-    var <> type;
+    var <> type;*/
 
 	*new {|def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type|
 		 ^super.new.init(
@@ -46,25 +46,25 @@ FluentCan {
         melodist = (\isomelody),
         type = (\converge)
        |
-        this.def = def;
-        this.durs = durs;
-        this.notes = notes;
-        this.cp = cp;
-        this.tempos = tempos;
-        this.transps = transps;
-        this.amps = amps;
-        this.percentageForTempo = percentageForTempo;
-        this.normalize = normalize;
-        this.baseTempo = baseTempo;
-        this.convergeOnLast = convergeOnLast;
-        this.instruments = instruments;
-        this.period = period;
-        this.repeat = repeat;
-        this.player = player;
-        this.osc = osc;
-        this.meta = meta;
-        this.melodist = melodist;
-        this.type = type;
+        this.def(def);
+        this.durs(durs);
+        this.notes(notes);
+        this.cp(cp);
+        this.tempos(tempos);
+        this.transps(transps);
+        this.amps(amps);
+        this.percentageForTempo(percentageForTempo);
+        this.normalize(normalize);
+        this.baseTempo(baseTempo);
+        this.convergeOnLast(convergeOnLast);
+        this.instruments(instruments);
+        this.period(period);
+        this.repeat(repeat);
+        this.player(player);
+        this.osc(osc);
+        this.meta(meta);
+        this.melodist(melodist);
+        this.type(type);
 	}
 
     canon {
@@ -140,5 +140,119 @@ FluentCan {
                 )[this.melodist]
             },
             {this.melodist});
+    }
+
+    def {|val|
+        if(val.isNil,
+            {^this.def},
+            {this.def = val})
+    }
+
+    cp {|val|
+        if(val.isNil,
+            {^this.cp},
+            {this.cp = val})
+    }
+
+    notes {|val|
+        if(val.isNil,
+            {^this.notes},
+            {this.notes = val})
+    }
+
+    durs {|val|
+        if(val.isNil,
+            {^this.durs},
+            {this.durs = val})
+    }
+
+    tempos {|val|
+        if(val.isNil,
+            {^this.tempos},
+            {this.tempos = val})
+    }
+
+    transps {|val|
+        if(val.isNil,
+            {^this.transps},
+            {this.transps = val})
+    }
+
+    amps {|val|
+        if(val.isNil,
+            {^this.amps},
+            {this.amps = val})
+    }
+
+    percentageForTempo {|val|
+        if(val.isNil,
+            {^this.percentageForTempo},
+            {this.percentageForTempo = val})
+    }
+
+    normalize {|val|
+        if(val.isNil,
+            {^this.normalize},
+            {this.normalize = val})
+    }
+
+    baseTempo {|val|
+        if(val.isNil,
+            {^this.baseTempo},
+            {this.baseTempo = val})
+    }
+
+    convergeOnLast {|val|
+        if(val.isNil,
+            {^this.convergeOnLast},
+            {this.convergeOnLast = val})
+    }
+
+    instruments {|val|
+        if(val.isNil,
+            {^this.instruments},
+            {this.instruments = val})
+    }
+
+    period {|val|
+        if(val.isNil,
+            {^this.period},
+            {this.period = val})
+    }
+
+    repeat {|val|
+        if(val.isNil,
+            {^this.repeat},
+            {this.repeat = val})
+    }
+
+    player {|val|
+        if(val.isNil,
+            {^this.player},
+            {this.player = val})
+    }
+
+    osc {|val|
+        if(val.isNil,
+            {^this.osc},
+            {this.osc = val})
+    }
+
+    meta {|val|
+        if(val.isNil,
+            {^this.meta},
+            {this.meta = val})
+    }
+
+    melodist {|val|
+        if(val.isNil,
+            {^this.melodist},
+            {this.melodist = val})
+    }
+
+    type {|val|
+        if(val.isNil,
+            {^this.type},
+            {this.type = val})
     }
 }
