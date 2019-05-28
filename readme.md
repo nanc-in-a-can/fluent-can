@@ -6,29 +6,35 @@ This is still a proof of concept.
 ## Usage
 ```supercollider
 (
-// make a Can.diverge
-a = FluentCan(\can2)
-.notes_([30])
-.period_(1)
-.repeat_(inf);
-
-a.mapNotes(_+20).play; // plays a canon
+Can.init;
+s.boot;
 )
 
+(
+// make a Can.converge
+a = FluentCan(\can2)
+.notes([61,62,63,64])
+.period(10)
+.tempos([1,2])
+.repeat(inf)
+.play
+)
+
+
 (// copies canon `a` and modifies it
-b = a.copy 
-.def_(\can3)
+b = a.copy
+.def(\can3)
 .mapNotes(_++[34, 35])// [MidiNote] -> ([MidiNote] -> [MidiNote]) -> [MidiNote]
-.tempos_([60, 70])
-.transps_([0, 7])
+.tempos([60, 70])
+.transps([0, 7])
 .play // will play a different canon
 )
 
 (// converts canon `b` to Can.diverge
 c = b.copy
-.def_(\can4)
-.percentageForTempo_([1, 1])
-.type_(\diverge)
-.play 
+.def(\can4)
+.percentageForTempo([1, 1])
+.type(\diverge)
+.play
 )
 ```
