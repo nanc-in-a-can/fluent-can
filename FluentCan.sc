@@ -12,6 +12,7 @@ FluentCan {
     var <> prConvergeonlast;
     var <> prInstruments;
     var <> prPeriod;
+    var <> prLen;
     var <> prRepeat;
     var <> prPlayer;
     var <> prOsc;
@@ -39,7 +40,8 @@ FluentCan {
         convergeOnLast = (false),
         instruments = ([\sin]),
         period = nil,
-        repeat = (inf),
+        len = nil,
+        repeat = (1),
         player = nil,
         osc = nil,
         meta = nil,
@@ -59,6 +61,7 @@ FluentCan {
         this.convergeOnLast(convergeOnLast);
         this.instruments(instruments);
         this.period(period);
+        this.len(len);
         this.repeat(repeat);
         this.player(player);
         this.osc(osc);
@@ -77,7 +80,7 @@ FluentCan {
             \converge, {
                 Can.converge(
                     symbol: this.def,
-                    melody: melodist.(this.durs, this.notes),
+                    melody: melodist.(this.durs, this.notes, this.len),
                     cp: this.cp,
                     voices: Can.convoices(this.tempos, this.transps, this.amps),
                     instruments: this.instruments,
@@ -91,7 +94,7 @@ FluentCan {
             \diverge, {
                 Can.diverge(
                     symbol: this.def,
-                    melody: melodist.(this.durs, this.notes),
+                    melody: melodist.(this.durs, this.notes, this.len),
                     tempos: Can.divtempos(this.tempos, this.percentageForTempo, this.normalize),
                     voices: Can.divoices(this.transps, this.amps),
                     baseTempo: this.baseTempo,
@@ -109,6 +112,13 @@ FluentCan {
 
     play {
         this.canon.play;
+    }
+
+    apply {|fn, def|
+        var can = if(def.isNil.not, {this.copy}, {this});
+        var maybeNewFluentCan = fn.(can);
+        if(maybeNewFluentCan.class != FluentCan, {("[FluentCan] .apply expects the return value of the function to be an instance of FluentCan, received" + maybeNewFluentCan.class).throw});
+        ^maybeNewFluentCan;
     }
 
     mapNotes {|fn|
@@ -219,6 +229,12 @@ FluentCan {
         if(val.isNil,
             {^this.prPeriod},
             {this.prPeriod = val})
+    }
+
+    len {|val|
+        if(val.isNil,
+            {^this.prLen},
+            {this.prLen = val})
     }
 
     repeat {|val|
