@@ -137,6 +137,10 @@ FluentCan {
         this.prTransps = fn.(this.transps)
     }
 
+    addTransps {|fnArr|
+        this.prTransps = PrFluentCan.composeFnArrays(this.transps, fnArr);
+    }
+
     mapPercentageForTempo {|fn|
         this.prPercentagefortempo = fn.(this.percentageForTempo)
     }
@@ -271,5 +275,27 @@ FluentCan {
         if(val.isNil,
             {^this.prType},
             {this.prType = val})
+    }
+}
+
+
+PrFluentCan {
+    *zipMaxWith {|fn, arr1, arr2|
+        arr1.postln;
+        arr2.postln;
+        ^max(arr1.size, arr2.size).collect({|i|
+            i.postln;
+            fn.(arr1[i].postln, arr2[i].postln);
+        });
+    }
+
+
+
+    *composeFnArrays {|fArr, gArr|
+        ^PrFluentCan.zipMaxWith(
+            {|fn1, fn2| fn2 <> fn1},
+            fArr,
+            gArr,
+        )
     }
 }
