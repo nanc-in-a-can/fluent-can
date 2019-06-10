@@ -20,6 +20,8 @@ FluentCan {
     var <> prMelodist;
     var <> prType;
 
+    var <> currentCanonInstance = nil;
+
 	*new {|def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type|
 		 ^super.new.init(
             def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type
@@ -75,8 +77,8 @@ FluentCan {
     }
 
     makeCanon {
-         var melodist = this.getMelodist();
-        ^switch(this.type,
+        var melodist = this.getMelodist();
+        this.currentCanonInstance = switch(this.type,
             \converge, {
                 Can.converge(
                     symbol: this.def,
@@ -107,12 +109,27 @@ FluentCan {
                     meta: this.meta
                 )
             }
-        )
+        );
+
+        ^this.currentCanonInstance;
     }
 
     play {
         this.canon.play;
     }
+
+    stop {
+        this.currentCanonInstance.stop;
+    }
+
+    pause {
+        this.currentCanonInstance.pause;
+    }
+
+    resume {
+        this.currentCanonInstance.resume;
+    }
+
 
     apply {|fn, def|
         var can = if(def.isNil.not, {this.copy}, {this});
