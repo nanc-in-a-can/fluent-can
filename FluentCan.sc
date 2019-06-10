@@ -142,17 +142,8 @@ FluentCan {
         this.prNotes = fn.(this.notes)
     }
 
-    compNotes {|fnArr|
-        this.prNotes = PrFluentCan.composeFnArrays(this.notes, fnArr);
-    }
-
-
     mapDurs {|fn|
         this.prDurs = fn.(this.durs)
-    }
-
-    compDurs {|fnArr|
-        this.prDurs = PrFluentCan.composeFnArrays(this.durs, fnArr);
     }
 
     mapTempos {|fn|
