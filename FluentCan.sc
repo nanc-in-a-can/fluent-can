@@ -125,24 +125,41 @@ FluentCan {
         this.prNotes = fn.(this.notes)
     }
 
+    compNotes {|fnArr|
+        this.prNotes = PrFluentCan.composeFnArrays(this.notes, fnArr);
+    }
+
+
     mapDurs {|fn|
         this.prDurs = fn.(this.durs)
+    }
+
+    compDurs {|fnArr|
+        this.prDurs = PrFluentCan.composeFnArrays(this.durs, fnArr);
     }
 
     mapTempos {|fn|
         this.prTempos = fn.(this.tempos)
     }
 
+    compTempos {|fnArr|
+        this.prTempos = PrFluentCan.composeFnArrays(this.tempos, fnArr);
+    }
+
     mapTransps {|fn|
         this.prTransps = fn.(this.transps)
     }
 
-    addTransps {|fnArr|
+    compTransps {|fnArr|
         this.prTransps = PrFluentCan.composeFnArrays(this.transps, fnArr);
     }
 
     mapPercentageForTempo {|fn|
         this.prPercentagefortempo = fn.(this.percentageForTempo)
+    }
+
+    compPercentageForTempo {|fnArr|
+        this.prPercentagefortempo = PrFluentCan.composeFnArrays(this.percentageForTempo, fnArr);
     }
 
     getMelodist {
@@ -281,21 +298,29 @@ FluentCan {
 
 PrFluentCan {
     *zipMaxWith {|fn, arr1, arr2|
-        arr1.postln;
-        arr2.postln;
         ^max(arr1.size, arr2.size).collect({|i|
-            i.postln;
-            fn.(arr1[i].postln, arr2[i].postln);
+            fn.(arr1[i], arr2[i]);
         });
     }
 
-
+    *validateElementForComposition {|el|
+        ^case(
+            {el.isFunction}, {el},
+            {el.isNumber}, {_+el},
+            {{|x| x}}
+        )
+    }
 
     *composeFnArrays {|fArr, gArr|
         ^PrFluentCan.zipMaxWith(
-            {|fn1, fn2| fn2 <> fn1},
+            {|fn1, fn2|
+                PrFluentCan.validateElementForComposition(fn2)
+                <> PrFluentCan.validateElementForComposition(fn1)
+            },
             fArr,
             gArr,
         )
     }
 }
+
+/*PrFluentCan.composeFnArrays([1,_*2,3,4], [_+1, _+2])[1].(2)*/
