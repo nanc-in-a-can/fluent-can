@@ -2,9 +2,9 @@ FluentCan {
     var <> prDef;
     var <> prCp;
     var <> prNotes;
-	var <> prDurs;
-	var <> prTempos;
-	var <> prTransps;
+    var <> prDurs;
+    var <> prTempos;
+    var <> prTransps;
     var <> prAmps;
     var <> prPercentagefortempo;
     var <> prNormalize;
