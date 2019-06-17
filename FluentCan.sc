@@ -22,9 +22,9 @@ FluentCan {
 
     var <> currentCanonInstance = nil;
 
-	*new {|def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type|
+	*new {|def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, len, repeat, player, osc, meta, melodist, type|
 		 ^super.new.init(
-            def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type
+            def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period,len, repeat, player, osc, meta, melodist, type
         )
 	}
 
@@ -151,7 +151,9 @@ FluentCan {
     }
 
     compTempos {|fnArr|
-        this.prTempos = PrFluentCan.composeFnArrays(this.tempos, fnArr);
+        var newCan = this.copy;
+        newCan.prTempos = PrFluentCan.composeFnArrays(newCan.tempos, fnArr);
+        ^newCan;
     }
 
     mapTransps {|fn|
@@ -159,7 +161,9 @@ FluentCan {
     }
 
     compTransps {|fnArr|
-        this.prTransps = PrFluentCan.composeFnArrays(this.transps, fnArr);
+        var newCan = this.copy;
+        newCan.prTransps = PrFluentCan.composeFnArrays(newCan.transps, fnArr);
+        ^newCan;
     }
 
     mapPercentageForTempo {|fn|
@@ -167,7 +171,9 @@ FluentCan {
     }
 
     compPercentageForTempo {|fnArr|
-        this.prPercentagefortempo = PrFluentCan.composeFnArrays(this.percentageForTempo, fnArr);
+        var newCan = this.copy;
+        newCan.prPercentagefortempo = PrFluentCan.composeFnArrays(newCan.percentageForTempo, fnArr);
+        ^newCan;
     }
 
     getMelodist {
