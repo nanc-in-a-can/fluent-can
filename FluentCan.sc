@@ -2,9 +2,9 @@ FluentCan {
     var <> prDef;
     var <> prCp;
     var <> prNotes;
-	var <> prDurs;
-	var <> prTempos;
-	var <> prTransps;
+    var <> prDurs;
+    var <> prTempos;
+    var <> prTransps;
     var <> prAmps;
     var <> prPercentagefortempo;
     var <> prNormalize;
@@ -12,6 +12,7 @@ FluentCan {
     var <> prConvergeonlast;
     var <> prInstruments;
     var <> prPeriod;
+    var <> prLen;
     var <> prRepeat;
     var <> prPlayer;
     var <> prOsc;
@@ -19,9 +20,11 @@ FluentCan {
     var <> prMelodist;
     var <> prType;
 
-	*new {|def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type|
+    var <> currentCanonInstance = nil;
+
+	*new {|def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, len, repeat, player, osc, meta, melodist, type|
 		 ^super.new.init(
-            def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period, repeat, player, osc, meta, melodist, type
+            def, durs, notes, cp, tempos, transps, amps, percentageForTempo, normalize, baseTempo, convergeOnLast, instruments, period,len, repeat, player, osc, meta, melodist, type
         )
 	}
 
@@ -39,7 +42,8 @@ FluentCan {
         convergeOnLast = (false),
         instruments = ([\sin]),
         period = nil,
-        repeat = (inf),
+        len = nil,
+        repeat = (1),
         player = nil,
         osc = nil,
         meta = nil,
@@ -59,6 +63,7 @@ FluentCan {
         this.convergeOnLast(convergeOnLast);
         this.instruments(instruments);
         this.period(period);
+        this.len(len);
         this.repeat(repeat);
         this.player(player);
         this.osc(osc);
@@ -72,12 +77,12 @@ FluentCan {
     }
 
     makeCanon {
-         var melodist = this.getMelodist();
-        ^switch(this.type,
+        var melodist = this.getMelodist();
+        this.currentCanonInstance = switch(this.type,
             \converge, {
                 Can.converge(
                     symbol: this.def,
-                    melody: melodist.(this.durs, this.notes),
+                    melody: melodist.(this.durs, this.notes, this.len),
                     cp: this.cp,
                     voices: Can.convoices(this.tempos, this.transps, this.amps),
                     instruments: this.instruments,
@@ -91,7 +96,7 @@ FluentCan {
             \diverge, {
                 Can.diverge(
                     symbol: this.def,
-                    melody: melodist.(this.durs, this.notes),
+                    melody: melodist.(this.durs, this.notes, this.len),
                     tempos: Can.divtempos(this.tempos, this.percentageForTempo, this.normalize),
                     voices: Can.divoices(this.transps, this.amps),
                     baseTempo: this.baseTempo,
@@ -104,11 +109,33 @@ FluentCan {
                     meta: this.meta
                 )
             }
-        )
+        );
+
+        ^this.currentCanonInstance;
     }
 
     play {
         this.canon.play;
+    }
+
+    stop {
+        this.currentCanonInstance.stop;
+    }
+
+    pause {
+        this.currentCanonInstance.pause;
+    }
+
+    resume {
+        this.currentCanonInstance.resume;
+    }
+
+
+    apply {|fn, def|
+        var can = if(def.isNil.not, {this.copy}, {this});
+        var maybeNewFluentCan = fn.(can);
+        if(maybeNewFluentCan.class != FluentCan, {("[FluentCan] .apply expects the return value of the function to be an instance of FluentCan, received" + maybeNewFluentCan.class).throw});
+        ^maybeNewFluentCan;
     }
 
     mapNotes {|fn|
@@ -123,12 +150,30 @@ FluentCan {
         this.prTempos = fn.(this.tempos)
     }
 
+    compTempos {|fnArr|
+        var newCan = this.copy;
+        newCan.prTempos = PrFluentCan.composeFnArrays(newCan.tempos, fnArr);
+        ^newCan;
+    }
+
     mapTransps {|fn|
         this.prTransps = fn.(this.transps)
     }
 
+    compTransps {|fnArr|
+        var newCan = this.copy;
+        newCan.prTransps = PrFluentCan.composeFnArrays(newCan.transps, fnArr);
+        ^newCan;
+    }
+
     mapPercentageForTempo {|fn|
         this.prPercentagefortempo = fn.(this.percentageForTempo)
+    }
+
+    compPercentageForTempo {|fnArr|
+        var newCan = this.copy;
+        newCan.prPercentagefortempo = PrFluentCan.composeFnArrays(newCan.percentageForTempo, fnArr);
+        ^newCan;
     }
 
     getMelodist {
@@ -140,120 +185,5 @@ FluentCan {
                 )[this.melodist]
             },
             {this.melodist});
-    }
-
-    // getters and setters mapped to the same names
-    def {|val|
-        if(val.isNil,
-            {^this.prDef},
-            {this.prDef = val})
-    }
-
-    cp {|val|
-        if(val.isNil,
-            {^this.prCp},
-            {this.prCp= val})
-    }
-
-    notes {|val|
-        if(val.isNil,
-            {^this.prNotes},
-            {this.prNotes = val})
-    }
-
-    durs {|val|
-        if(val.isNil,
-            {^this.prDurs},
-            {this.prDurs = val})
-    }
-
-    tempos {|val|
-        if(val.isNil,
-            {^this.prTempos},
-            {this.prTempos = val})
-    }
-
-    transps {|val|
-        if(val.isNil,
-            {^this.prTransps},
-            {this.prTransps = val})
-    }
-
-    amps {|val|
-        if(val.isNil,
-            {^this.prAmps},
-            {this.prAmps = val})
-    }
-
-    percentageForTempo {|val|
-        if(val.isNil,
-            {^this.prPercentagefortempo},
-            {this.prPercentagefortempo = val})
-    }
-
-    normalize {|val|
-        if(val.isNil,
-            {^this.prNormalize},
-            {this.prNormalize = val})
-    }
-
-    baseTempo {|val|
-        if(val.isNil,
-            {^this.prBasetempo},
-            {this.prBasetempo = val})
-    }
-
-    convergeOnLast {|val|
-        if(val.isNil,
-            {^this.prConvergeonlast},
-            {this.prConvergeonlast = val})
-    }
-
-    instruments {|val|
-        if(val.isNil,
-            {^this.prInstruments},
-            {this.prInstruments = val})
-    }
-
-    period {|val|
-        if(val.isNil,
-            {^this.prPeriod},
-            {this.prPeriod = val})
-    }
-
-    repeat {|val|
-        if(val.isNil,
-            {^this.prRepeat},
-            {this.prRepeat = val})
-    }
-
-    player {|val|
-        if(val.isNil,
-            {^this.prPlayer},
-            {this.prPlayer = val})
-    }
-
-    osc {|val|
-        if(val.isNil,
-            {^this.prOsc},
-            {this.prOsc = val})
-    }
-
-    meta {|val|
-        if(val.isNil,
-            {^this.prMeta},
-            {this.prMeta = val})
-    }
-
-    melodist {|val|
-        if(val.isNil,
-            {^this.prMelodist},
-            {this.prMelodist = val})
-    }
-
-    type {|val|
-        if(val.isNil,
-            {^this.prType},
-            {this.prType = val})
     }
 }
