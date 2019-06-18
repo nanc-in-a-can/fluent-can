@@ -16,11 +16,12 @@ Live coding wrapper for Nanc-in-a-Can/canon-generator
 The main purpose of `FluentCan` is to allow for a concise approach to creating and transforming temporal canons in a live coding context. This is achieved by providing sensible defaults and efficient mechanisms to deal with the data structure provieded by Nanc-in-a-Can/canon-generator.
 
 ## Usage
-```
+```supercollider
 (
 // make a Can.converge
 a = FluentCan().notes([30]).period(1).play;
 )
+
 
 (// copies canon `a` and modifies it
 b = a.copy 
@@ -96,7 +97,7 @@ The main advantage of using setters over the constructor is that they can be use
 
 See [Copying (cloning) a Fluent Can](#Copying-cloning-a-Fluent-Can) for relevant examples.
 
-```
+```supercollider
   //Canon configuration
   FluentCan()
   .durs([Number])
@@ -180,6 +181,6 @@ c.notes; // [40, 50]
 d = c.mapNotes({|notes| notes + 20});
 d.notes; // [60, 70]
 
-
-c.mapNotes(_ + 7}); // remember this is a shorthand, where _ stands for the value of notes, that is, [60, 70] as it was previously mapped.
-c.notes // [67, 77]
+e = d.mapNotes(_ + 7}); // remember this is a shorthand, where _ stands for the value of notes, that is, [60, 70] as it was previously mapped.
+e.notes // [67, 77]
+```
