@@ -139,15 +139,21 @@ FluentCan {
     }
 
     mapNotes {|fn|
-        this.prNotes = fn.(this.notes)
+        var newCan = this.copy;
+        newCan.prNotes = fn.(newCan.notes);
+        ^newCan;
     }
 
     mapDurs {|fn|
-        this.prDurs = fn.(this.durs)
+        var newCan = this.copy;
+        newCan.prDurs = fn.(newCan.durs)
+        ^newCan;
     }
 
     mapTempos {|fn|
-        this.prTempos = fn.(this.tempos)
+        var newCan = this.copy;
+        newCan.prTempos = fn.(newCan.tempos)
+        ^newCan;
     }
 
     compTempos {|fnArr|
@@ -157,7 +163,9 @@ FluentCan {
     }
 
     mapTransps {|fn|
-        this.prTransps = fn.(this.transps)
+        var newCan = this.copy;
+        newCan.prTransps = fn.(newCan.transps)
+        ^newCan;
     }
 
     compTransps {|fnArr|
@@ -167,7 +175,9 @@ FluentCan {
     }
 
     mapPercentageForTempo {|fn|
-        this.prPercentagefortempo = fn.(this.percentageForTempo)
+        var newCan = this.copy;
+        newCan.prPercentagefortempo = fn.(newCan.percentageForTempo)
+        ^newCan;
     }
 
     compPercentageForTempo {|fnArr|
