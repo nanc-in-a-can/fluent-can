@@ -43,7 +43,7 @@ FluentCan {
         instruments = ([\sin]),
         period = nil,
         len = nil,
-        repeat = (1),
+        repeat = (inf),
         player = nil,
         osc = nil,
         meta = nil,
