@@ -66,11 +66,12 @@ Quarks.update("https://github.com/nanc-in-a-can/fluent-can.git");
 
 
 ## Usage
-```
+```supercollider
 (
 // make a Can.converge
 a = FluentCan().notes([30]).period(1).play;
 )
+
 
 (// copies canon `a` and modifies it
 b = a.copy 
@@ -150,7 +151,7 @@ The main advantage of using setters over the constructor is that they can be use
 
 See [Copying (cloning) a FluentCan](#Copying-cloning-a-FluentCan) for relevant examples.
 
-```
+```supercollider
   //Canon configuration
   FluentCan()
   .durs([Number])
