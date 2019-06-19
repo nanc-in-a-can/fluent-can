@@ -50,7 +50,7 @@ FluentCan {
         melodist = (\isomelody),
         type = (\converge)
        |
-        this.prDef(def);
+        this.prDef = def;
         this.durs(durs);
         this.notes(notes);
         this.cp(cp);
