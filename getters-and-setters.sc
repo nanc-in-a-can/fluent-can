@@ -3,7 +3,11 @@
     def {|val|
         if(val.isNil,
             {^this.prDef},
-            {this.prDef = val})
+            {   
+                var newCan = this.copy;
+                newCan.prDef = val
+                ^newCan;
+            })
     }
 
     cp {|val|

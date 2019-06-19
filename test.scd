@@ -14,9 +14,9 @@ a = FluentCan(\can2)
 .len(20)
 .transps([_+0, _+5, _+7])
 .apply(~iso.xo("xoo"))
-.repeat(inf)
+.repeat(1)
 //.canon.canon
-// .play
+.play
 )
 a.postCanon
 a.pause
