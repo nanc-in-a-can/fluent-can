@@ -57,7 +57,7 @@ If you do not have `nanc-in-a-can/canon-generator` installed, you will have to t
 
 ### Updating the library
 With `git` it is as simple as 
-```
+```supercollider
 (
 Quarks.update("https://github.com/nanc-in-a-can/canon-generator.git");
 Quarks.update("https://github.com/nanc-in-a-can/fluent-can.git");
@@ -234,7 +234,7 @@ d.stop;
 ### Mappers
 Methods prefaced with the word `map`, such as `mapNotes` and `mapDurs`, all work the same way. They receive a function that should take as its argument the value of the property (i.e. `notes` for `mapNotes`, etc.) and should return a new value for that property.
 
-```
+```supercollider
 (
 c.def(\mycan)
 .mapNotes({|notes| notes + 20})
@@ -358,4 +358,4 @@ Note that this methods will render a canon and thus are somewhat expensive.
 
 
 ## Further learning
-As FluentCan is a wrapper on top of `Nanc-in-a-Can/canon-generator` you may want to have a look at the [readme]((https://github.com/nanc-in-a-can/canon-generator/)) of that repository to learn more about the features provided by these set of classes.
+As FluentCan is a wrapper on top of `Nanc-in-a-Can/canon-generator` you may want to have a look at the [readme](https://github.com/nanc-in-a-can/canon-generator/) of that repository to learn more about the features provided by these set of classes.
