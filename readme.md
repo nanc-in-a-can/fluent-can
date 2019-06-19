@@ -1,5 +1,5 @@
 # Fluent Can <!-- omit in toc -->
-Live coding wrapper for Nanc-in-a-Can/canon-generator
+Live coding wrapper for `Nanc-in-a-Can/canon-generator`
 
 - [Objectives](#Objectives)
 - [Installation](#Installation)
@@ -24,9 +24,10 @@ Live coding wrapper for Nanc-in-a-Can/canon-generator
     - [Example use case](#Example-use-case)
 - [Creating and accessing a Canon instance](#Creating-and-accessing-a-Canon-instance)
 - [Printing Canon data](#Printing-Canon-data)
+- [Further learning](#Further-learning)
 
 ## Objectives
-The main purpose of `FluentCan` is to allow for a concise approach to creating and transforming temporal canons in a live coding context. This is achieved by providing sensible defaults and efficient mechanisms to deal with the data structure required by [Nanc-in-a-Can/canon-generator](https://github.com/nanc-in-a-can/canon-generator).
+The main purpose of `FluentCan` is to allow for a concise approach to creating and transforming [temporal canons](https://github.com/nanc-in-a-can/canon-generator#temporal-canons) in a live coding context. This is achieved by providing sensible defaults and efficient mechanisms to deal with the data structure required by [Nanc-in-a-Can/canon-generator](https://github.com/nanc-in-a-can/canon-generator).
 
 ## Installation
 `FluentCan` provides a set of classes, and thus the need to be installed in specific folder to be available.
@@ -63,20 +64,25 @@ Quarks.update("https://github.com/nanc-in-a-can/fluent-can.git");
 )
 ```
 
-
-
 ## Usage
+The best way to learn how `FluentCan` works if to follow this readme and play around with the examples provided.
+
 ```supercollider
 (
+Can.init;
+s.boot;
+)
+
+(
 // make a Can.converge
-a = FluentCan().notes([30]).period(1).play;
+a = FluentCan().def(\can1).notes([30]).period(1).play;
 )
 
 
 (// copies canon `a` and modifies it
 b = a.copy 
 .def(\can2)
-.mapNotes(_++[34, 35])// [MidiNote] -> ([MidiNote] -> [MidiNote]) -> [MidiNote]
+.mapNotes(_++[34, 35])// concatenates two new notes to the notes of canon `a` aka \can1
 .tempos([60, 70])
 .transps([0, 7])
 .play // will play a different canon
@@ -90,7 +96,6 @@ c = b.copy
 .play 
 )
 ```
-
 
 ## The two ways to create a `FluentCan`
 Both methods will yield the same canon.
@@ -351,3 +356,6 @@ The following methods can send to the post window data form a rendered canon.
 
 Note that this methods will render a canon and thus are somewhat expensive.
 
+
+## Further learning
+As FluentCan is a wrapper on top of `Nanc-in-a-Can/canon-generator` you may want to have a look at the [readme]((https://github.com/nanc-in-a-can/canon-generator/)) of that repository to learn more about the features provided by these set of classes.
