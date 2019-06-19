@@ -31,7 +31,7 @@ FluentCan {
 	init {|
         def = nil,
         durs = ([1]),
-        notes = ([]),
+        notes = ([\rest]),
         cp = (0),
         tempos = ([60]),
         transps = ([0]),
@@ -156,12 +156,6 @@ FluentCan {
         ^newCan;
     }
 
-    compTempos {|fnArr|
-        var newCan = this.copy;
-        newCan.prTempos = PrFluentCan.composeFnArrays(newCan.tempos, fnArr);
-        ^newCan;
-    }
-
     mapTransps {|fn|
         var newCan = this.copy;
         newCan.prTransps = fn.(newCan.transps)
@@ -177,12 +171,6 @@ FluentCan {
     mapPercentageForTempo {|fn|
         var newCan = this.copy;
         newCan.prPercentagefortempo = fn.(newCan.percentageForTempo)
-        ^newCan;
-    }
-
-    compPercentageForTempo {|fnArr|
-        var newCan = this.copy;
-        newCan.prPercentagefortempo = PrFluentCan.composeFnArrays(newCan.percentageForTempo, fnArr);
         ^newCan;
     }
 
