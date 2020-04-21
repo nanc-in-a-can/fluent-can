@@ -46,7 +46,7 @@ FluentCan {
         repeat = (inf),
         player = nil,
         osc = nil,
-        meta = (()),
+        meta = (Event.new),
         melodist = (\isomelody),
         type = (\converge)
        |
