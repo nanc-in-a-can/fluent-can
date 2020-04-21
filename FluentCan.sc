@@ -82,7 +82,7 @@ FluentCan {
             \converge, {
                 Can.converge(
                     symbol: this.def,
-                    melody: melodist.(this.durs, this.notes, this.len),
+                    melody: melodist.(this.durs, this.notes, this.amps, this.len),
                     cp: this.cp,
                     voices: Can.convoices(this.tempos, this.transps, this.amps),
                     instruments: this.instruments,
@@ -111,7 +111,7 @@ FluentCan {
             }
         );
 
-        ^this.currentCanonInstance;
+        ^this.currentCanonInstance.postm("currentcan");
     }
 
     play {
