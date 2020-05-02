@@ -56,7 +56,7 @@ If you do not have `nanc-in-a-can/canon-generator` installed, you will have to t
 
 
 ### Updating the library
-With `git` it is as simple as 
+With `git` it is as simple as
 ```supercollider
 (
 Quarks.update("https://github.com/nanc-in-a-can/canon-generator.git");
@@ -80,7 +80,7 @@ a = FluentCan().def(\can1).notes([30]).period(1).play;
 
 
 (// copies canon `a` and modifies it
-b = a.copy 
+b = a.copy
 .def(\can2)
 .mapNotes(_++[34, 35])// concatenates two new notes to the notes of canon `a` aka \can1
 .tempos([60, 70])
@@ -93,7 +93,7 @@ c = b.copy
 .def(\can4)
 .percentageForTempo([1, 1])
 .type(\diverge)
-.play 
+.play
 )
 ```
 
@@ -122,14 +122,14 @@ FluentCan(
   durs: [Number], // defaults to [1], required
   notes: [Number (midi note)], // defaults to [\rest], required, must be other than [\rest] to produce any sound
   tempos: [Number], // defaults to [60], required, each number will create a new voice, provided there are as many transps as tempos
-  transps: [Number] || [Number] -> [Number], // defaults to [0], required, each number will create a new voice, provided there are as many tempos as transps. 
+  transps: [Number] || [Number] -> [Number], // defaults to [0], required, each number will create a new voice, provided there are as many tempos as transps.
   // For transps, functions that take and number array and return a number array may be used instead
   amps: [Number], // requried, defaults to [1]
   period: Number, // defaults to nil
   len: Integer, // defaults to nil
   melodist: Symbol, // defaults to \isomelody, may also be \melody
   type: Symbol, // defaults to \converge, may also be \diverge
-  
+
   // Convergence canon specific configuration
   cp: Integer, // defaults to 0, required for type \converge
 
@@ -168,7 +168,7 @@ See [Copying (cloning) a FluentCan](#Copying-cloning-a-FluentCan) for relevant e
   .len(Integer)
   .melodist(Symbol)
   .type(Symbol)
-  
+
   // Convergence canon specific configuration
   .cp(Integer)
 
@@ -220,7 +220,7 @@ c = FluentCan().notes([80, 85]).durs([1, 2, 1.5]).len(10).period(8);
 
 (
 d = c.copy.tempos([3, 4]).transps([-5, -12]).cp(5).period(7) // add stuff or overwritting it (i.e. period)
-  .mapNotes({|notes| notes++[83]}) // modifying notes, here by adding another note to the sequence 
+  .mapNotes({|notes| notes++[83]}) // modifying notes, here by adding another note to the sequence
   // .mapNotes(_++[83]) // this is a a shorthand form for the same function
   .mapDurs(_[0..1]);// selecting only the first two durs, i.e. [1, 2], shorthand form
 )
@@ -287,7 +287,7 @@ a = FluentCan(\can)
 ```supercollider
 (
 // this function may be inlined inside of .apply, but here we use it outside to show that such functions could be easily switched.
-~customFunc= {|fluentCan| 
+~customFunc= {|fluentCan|
   // This function takes the fluentCan notes and makes them tempos.
   // Then every voice will be transposed by a fifth above the last one.
   var notes = fluentCan.notes;
@@ -352,7 +352,7 @@ Calling `.play` will also trigger the generation of a canon.
 
 ## Printing Canon data
 The following methods can send to the post window data form a rendered canon.
-`.postCanon`, `.postNotes`, `.postDurs`. 
+`.postCanon`, `.postNotes`, `.postDurs`.
 
 Note that this methods will render a canon and thus are somewhat expensive.
 

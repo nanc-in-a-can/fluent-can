@@ -111,7 +111,7 @@ FluentCan {
             }
         );
 
-        ^this.currentCanonInstance.postm("currentcan");
+        ^this.currentCanonInstance;
     }
 
     play {
