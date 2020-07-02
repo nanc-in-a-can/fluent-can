@@ -96,7 +96,7 @@ FluentCan {
             \diverge, {
                 Can.diverge(
                     symbol: this.def,
-                    melody: melodist.(this.durs, this.notes, this.len),
+                    melody: melodist.(this.durs, this.notes, this.amps, this.len),
                     tempos: Can.divtempos(this.tempos, this.percentageForTempo, this.normalize),
                     voices: Can.divoices(this.transps, this.amps),
                     baseTempo: this.baseTempo,
@@ -178,8 +178,8 @@ FluentCan {
         ^if(Set[\melody, \isomelody].sect(Set[this.melodist]).size > 0,
             {
                 (
-                    \melody: {|durs, notes| Can.melody(durs, notes)},
-                    \isomelody: {|durs, notes, len| Can.isomelody(durs, notes, len)}
+                    \melody: {|durs, notes, amps| Can.melody(durs, notes, amps)},
+                    \isomelody: {|durs, notes, amps, len| Can.isomelody(durs, notes, amps, len)}
                 )[this.melodist]
             },
             {this.melodist});
